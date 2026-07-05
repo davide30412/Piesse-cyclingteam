@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <span class="brand">
+      <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="{{ team.nome_squadra }}" class="brand-logo">
+      {{ team.nome_squadra }}
+    </span>
+    <div class="nav-links">
+      <a href="#storia">Storia</a>
+      <a href="#vittorie">Vittorie</a>
+      <a href="#atleti">Atleti</a>
+      <a href="#staff">Staff</a>
+      <a href="#contatti">Contatti</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <span class="eyebrow">Dal {{ team.storia.anno_fondazione }} — su strada</span>
+    <h1 class="sr-only">{{ team.nome_squadra }}</h1>
+    <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="{{ team.nome_squadra }}" class="hero-logo">
+    <p class="claim">{{ team.motto }}</p>
+  </div>
+  <div class="hero-profile" aria-hidden="true">
+    <!-- Profilo altimetrico stilizzato: il segno distintivo del sito -->
+    <svg viewBox="0 0 1000 220" preserveAspectRatio="none">
+      <polygon points="0,220 0,190 90,150 180,170 260,90 340,130 430,40 520,110 610,60 700,140 800,100 900,160 1000,120 1000,220"
+               fill="url(#profileGradient)"/>
+      <defs>
+        <linearGradient id="profileGradient" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="var(--accent-red)"/>
+          <stop offset="55%" stop-color="var(--accent-yellow)"/>
+          <stop offset="100%" stop-color="var(--accent-red)"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+</header>
+
+<!-- STORIA -->
+<section id="storia" class="section">
+  <div class="section-inner">
+    <span class="section-eyebrow">KM 0 — La partenza</span>
+    <h2>La nostra storia</h2>
+    <p class="body-text">{{ team.storia.testo }}</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VITTORIE -->
+<section id="vittorie" class="section section-dark">
+  <div class="section-inner">
+    <span class="section-eyebrow">Traguardo tagliato</span>
+    <h2>Vittorie più importanti</h2>
+    <ul class="timeline">
+      {% for v in team.vittorie %}
+      <li class="timeline-item">
+        <span class="timeline-year">{{ v.anno }}</span>
+        <div class="timeline-body">
+          <h3>{{ v.titolo }}</h3>
+          <p>{{ v.descrizione }}</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ATLETI -->
+<section id="atleti" class="section">
+  <div class="section-inner">
+    <span class="section-eyebrow">Il gruppo</span>
+    <h2>I nostri atleti</h2>
+    <div class="roster-grid">
+      {% for a in team.atleti %}
+      <div class="roster-card">
+        <h3>{{ a.nome }}</h3>
+        <span class="role-tag">{{ a.categoria }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STAFF -->
+<section id="staff" class="section section-dark">
+  <div class="section-inner">
+    <span class="section-eyebrow">Dietro le quinte</span>
+    <h2>Staff tecnico</h2>
+    <div class="contacts-grid">
+      <div class="contact-item">
+        <span class="contact-label">Direttori sportivi</span>
+        <span>{{ team.staff.direttori_sportivi | join(', ') }}</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Istruttori</span>
+        <span>{{ team.staff.istruttori | join(', ') }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTATTI -->
+<section id="contatti" class="section">
+  <div class="section-inner">
+    <span class="section-eyebrow">Ultimo km</span>
+    <h2>Contatti</h2>
+    <div class="contacts-grid">
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <a href="mailto:{{ team.contatti.email }}">{{ team.contatti.email }}</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Telefono</span>
+        <a href="tel:{{ team.contatti.telefono }}">{{ team.contatti.telefono }}</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Sede</span>
+        <span>{{ team.contatti.indirizzo }}</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Social</span>
+        <span>
+          <a href="{{ team.contatti.instagram }}" target="_blank" rel="noopener">Instagram</a>
+          &middot;
+          <a href="{{ team.contatti.facebook }}" target="_blank" rel="noopener">Facebook</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>&copy; {{ team.storia.anno_fondazione }}–2026 {{ team.nome_squadra }}. Tutti i diritti riservati.</p>
+</footer>
+
+{% endblock %}
