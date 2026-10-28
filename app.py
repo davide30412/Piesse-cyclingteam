@@ -55,20 +55,20 @@ TEAM_DATA = {
 
     "atleti": [
         {
-            "nome": "Ettore Scottoni",
-            "categoria": "Allievo 2",
-        },
-        {
-            "nome": "Davide Sellati",
+            "nome": "Davide Campoli",
             "categoria": "Allievo 1",
         },
         {
-            "nome": "Giovanni Mancini",
+            "nome": "Davide Sellati",
             "categoria": "Allievo 2",
         },
         {
-            "nome": "Mirko Troiani",
-            "categoria": "Esordiente 2",
+            "nome": "Jacob Jamilla",
+            "categoria": "Allievo 2",
+        },
+        {
+            "nome": "",
+            "categoria": "",
         },
     ],
 
